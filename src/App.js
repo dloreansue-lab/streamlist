@@ -5,18 +5,9 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import StreamList from "./components/StreamList";
-
-function Movies() {
-  return <h1>Movies Page</h1>;
-}
-
-function Cart() {
-  return <h1>Cart Page</h1>;
-}
-
-function About() {
-  return <h1>About Page</h1>;
-}
+import Movies from "./components/Movies";
+import Cart from "./components/Cart";
+import About from "./components/About";
 
 function App() {
   return (

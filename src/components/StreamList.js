@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
@@ -7,6 +7,20 @@ function StreamList() {
   const [movie, setMovie] = useState("");
   const [movies, setMovies] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
+
+  // Load movies from Local Storage
+  useEffect(() => {
+    const savedMovies = localStorage.getItem("movies");
+
+    if (savedMovies) {
+      setMovies(JSON.parse(savedMovies));
+    }
+  }, []);
+
+  // Save movies whenever the list changes
+  useEffect(() => {
+    localStorage.setItem("movies", JSON.stringify(movies));
+  }, [movies]);
 
   const addMovie = () => {
     if (movie.trim() === "") return;
@@ -40,14 +54,12 @@ function StreamList() {
 
   const completeMovie = (index) => {
     const updatedMovies = [...movies];
-    updatedMovies[index].completed =
-      !updatedMovies[index].completed;
+    updatedMovies[index].completed = !updatedMovies[index].completed;
     setMovies(updatedMovies);
   };
 
   return (
     <div className="stream-container">
-
       <h1>🎬 StreamList</h1>
 
       <input
@@ -62,21 +74,13 @@ function StreamList() {
       </button>
 
       <ul>
-
         {movies.map((item, index) => (
-
           <li key={index}>
-
-            <span
-              className={
-                item.completed ? "completed" : ""
-              }
-            >
+            <span className={item.completed ? "completed" : ""}>
               {item.title}
             </span>
 
             <div className="buttons">
-
               <button onClick={() => completeMovie(index)}>
                 <CheckCircleIcon />
               </button>
@@ -88,15 +92,10 @@ function StreamList() {
               <button onClick={() => deleteMovie(index)}>
                 <DeleteIcon />
               </button>
-
             </div>
-
           </li>
-
         ))}
-
       </ul>
-
     </div>
   );
 }
