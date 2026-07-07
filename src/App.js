@@ -3,24 +3,35 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 
+import { CartProvider } from "./context/CartContext";
+
 import Navbar from "./components/Navbar";
 import StreamList from "./components/StreamList";
 import Movies from "./components/Movies";
 import Cart from "./components/Cart";
 import About from "./components/About";
+import Subscriptions from "./components/Subscriptions";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
+    <CartProvider>
+      <Router>
+        <Navbar />
 
-      <Routes>
-        <Route path="/" element={<StreamList />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
+        <Routes>
+          <Route path="/" element={<StreamList />} />
+
+          <Route path="/movies" element={<Movies />} />
+
+          <Route path="/subscriptions" element={<Subscriptions />} />
+
+          <Route path="/cart" element={<Cart />} />
+
+          <Route path="/about" element={<About />} />
+        </Routes>
+
+      </Router>
+    </CartProvider>
   );
 }
 

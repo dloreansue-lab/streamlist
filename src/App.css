@@ -67,3 +67,44 @@ li {
 .buttons button {
   margin-left: 8px;
 }
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+
+.product-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 10px lightgray;
+}
+
+
+.product-card img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.product-card button {
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+
+.product-card button:hover {
+  opacity: 0.8;
+}
+
+
+.cart-item {
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}

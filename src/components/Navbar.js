@@ -1,17 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
-function Navbar() {
-  return (
-    <nav style={{ display: "flex", gap: "15px", padding: "10px" }}>
-      <h2 style={{ marginRight: "20px" }}>StreamList</h2>
+import { CartContext } from "../context/CartContext";
 
-      <Link to="/">Home</Link>
-      <Link to="/movies">Movies</Link>
-      <Link to="/cart">Cart</Link>
-      <Link to="/about">About</Link>
+
+function Navbar() {
+
+  const { cart } = useContext(CartContext);
+
+
+  return (
+    <nav className="navbar">
+
+      <h2>StreamList</h2>
+
+
+      <div>
+
+        <Link to="/">
+          Home
+        </Link>
+
+
+        <Link to="/movies">
+          Movies
+        </Link>
+
+
+        <Link to="/subscriptions">
+          Subscriptions
+        </Link>
+
+
+        <Link to="/cart">
+          Cart ({cart.length})
+        </Link>
+
+
+        <Link to="/about">
+          About
+        </Link>
+
+      </div>
+
+
     </nav>
   );
+
 }
+
 
 export default Navbar;
