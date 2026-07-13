@@ -32,12 +32,13 @@ function StreamList() {
       setEditIndex(null);
     } else {
       setMovies([
-        ...movies,
-        {
-          title: movie,
-          completed: false,
-        },
-      ]);
+  ...movies,
+  {
+    id: Date.now(),
+    title: movie,
+    completed: false,
+  },
+]);
     }
 
     setMovie("");
@@ -75,7 +76,7 @@ function StreamList() {
 
       <ul>
         {movies.map((item, index) => (
-          <li key={index}>
+          <li key={item.id}>
             <span className={item.completed ? "completed" : ""}>
               {item.title}
             </span>
