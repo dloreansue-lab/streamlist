@@ -1,57 +1,71 @@
 import React, { useContext } from "react";
 import { CartContext } from "../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
-
   const {
     cart,
     removeFromCart,
     updateQuantity,
-    total
+    total,
   } = useContext(CartContext);
+
+  const navigate = useNavigate();
 
 
   return (
     <div className="stream-container">
 
-      <h1>Your Cart</h1>
+      <h1>Shopping Cart</h1>
 
 
       {cart.length === 0 ? (
-
-        <p>Your cart is empty.</p>
-
+        <p>Your cart is currently empty.</p>
       ) : (
-
         <>
 
           {cart.map((item) => (
 
-            <div className="cart-item" key={item.id}>
+            <div 
+              key={item.id}
+              className="cart-item"
+            >
 
               <h2>{item.service}</h2>
 
-              <p>{item.serviceInfo}</p>
+              <p>
+                Price: ${item.price.toFixed(2)}
+              </p>
 
               <p>
-                Price: ${item.price}
+                Quantity: {item.amount}
               </p>
 
 
-              <label>
-                Quantity:
-                <input
-                  type="number"
-                  min="1"
-                  value={item.amount}
-                  onChange={(e) =>
-                    updateQuantity(
-                      item.id,
-                      Number(e.target.value)
-                    )
-                  }
-                />
-              </label>
+              <button
+                onClick={() =>
+                  updateQuantity(
+                    item.id,
+                    item.amount + 1
+                  )
+                }
+              >
+                +
+              </button>
+
+
+              <button
+                onClick={() =>
+                  updateQuantity(
+                    item.id,
+                    item.amount > 1
+                      ? item.amount - 1
+                      : 1
+                  )
+                }
+              >
+                -
+              </button>
 
 
               <button
@@ -63,24 +77,33 @@ function Cart() {
               </button>
 
 
-              <hr />
-
             </div>
 
           ))}
+
+
+          <hr />
 
 
           <h2>
             Total: ${total.toFixed(2)}
           </h2>
 
-        </>
 
+          <button
+            onClick={() =>
+              navigate("/creditcard")
+            }
+          >
+            Proceed to Checkout
+          </button>
+
+
+        </>
       )}
 
     </div>
   );
-
 }
 
 export default Cart;
